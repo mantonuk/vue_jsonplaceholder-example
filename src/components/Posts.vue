@@ -22,7 +22,7 @@ export default {
     props: {
         title : String,
     },
-    created() {
+    mounted() {
         this.loadPosts();
     },
     methods : {
