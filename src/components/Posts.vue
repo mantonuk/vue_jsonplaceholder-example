@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1>{{ title }}</h1>
-        <ul>
+		<Loader v-if="loading" />
+        <ul v-else-if="items.length">
             <PostItem 
                 v-for="(item, index) in items" 
                 v-bind:item="item"
@@ -9,6 +10,7 @@
                 v-bind:key="item.id"
                 />
         </ul>
+        <div v-else>No data</div>
     </div>
 </template>
 
@@ -16,6 +18,7 @@
 import axios from 'axios';
 
 import PostItem from '@/components/PostItem'
+import Loader from '@/components/Loader'
 
 export default {
     name: 'Posts',
@@ -27,8 +30,14 @@ export default {
     },
     methods : {
         loadPosts() {
-            axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(({data}) => this.items = data)
+            this.loading = true;
+            setTimeout(() => {
+                axios.get('https://jsonplaceholder.typicode.com/posts')
+                .then(({data}) => {
+                    this.items = data;
+                    this.loading  = false;
+                })
+            }, 3000);
         },
         loadPostById({id}) {
             console.log(id);
@@ -45,27 +54,13 @@ export default {
 	data() {
 		return {
 			items: [
-                {
-                    id : 1,
-                    title: 'Title1'
-                },
-                {
-                    id : 2,
-                    title: 'Title2'
-                },
-                {
-                    id : 3,
-                    title: 'Title3'
-                },
-                {
-                    id : 4,
-                    title: 'Title4'
-                },
-            ]
+            ],
+            loading: true,
 		}
 	},
     components : {
-        PostItem
+        PostItem,
+		Loader
     }
 }
 </script>

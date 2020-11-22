@@ -2,21 +2,19 @@
   <div id="app">
     <PageHeader somePropsValue="somePropsValue Header"/>
     <img alt="Vue logo" src="./assets/logo.png">
-    <Posts title="Posts" />
+    <router-view />
     <PageFooter somePropsValue="somePropsValue Footer"/>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/PageHeader.vue'
-import Posts from '@/components/Posts.vue'
 import PageFooter from '@/components/PageFooter.vue'
 
 export default {
   name: 'App',
   components: {
     PageHeader,
-    Posts,
     PageFooter,
   }
 }

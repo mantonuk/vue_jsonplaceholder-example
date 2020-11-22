@@ -2,9 +2,10 @@
     <header>
     {{ somePropsValue }}
     <ul>
-        <li><span><a href="">menu 1</a></span></li>
-        <li><span><a href="">menu 2</a></span></li>
+        <li><span><router-link to="/">Home</router-link></span></li>
+        <li><span><router-link to="/posts">Posts</router-link></span></li>
     </ul>
+    <hr />
     </header>
 </template>
 
